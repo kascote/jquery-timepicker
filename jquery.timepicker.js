@@ -35,7 +35,8 @@ requires jQuery 1.7+
 		disableTimeRanges: [],
 		closeOnWindowScroll: false,
 		typeaheadHighlight: true,
-		noneOption: false
+		noneOption: false,
+    beforeShowTime: $.noop
 	};
 	var _lang = {
 		am: 'am',
@@ -465,6 +466,14 @@ requires jQuery 1.7+
 					row.append(duration);
 				}
 			}
+
+      if (settings.beforeShowTime !== $.noop) {
+        var clsName = settings.beforeShowTime(row.data('time'), timeString);
+        if ((clsName === undefined) || (typeof(clsName) !== 'string')) {
+          clsName = '';
+        }
+        row.addClass(clsName);
+      }
 
 			if (drCur < drLen) {
 				if (timeInt >= dr[drCur][1]) {

@@ -64,7 +64,11 @@
 
             <script>
                 $(function() {
-                    $('#scrollDefaultExample').timepicker({ 'scrollDefault': 'now' });
+                    function showMeTime(intTime, timeStr) {
+                      console.log(intTime, timeStr);
+                      return 'mytime';
+                    }
+                    $('#scrollDefaultExample').timepicker({ 'scrollDefault': 'now', beforeShowTime: showMeTime });
                 });
             </script>
 
